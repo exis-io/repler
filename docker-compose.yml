@@ -1,0 +1,29 @@
+version: '2'
+services:
+  node:
+    image: exis/node
+    environment:
+      EXIS_AUTHENTICATION: "off"
+      EXIS_PERMISSIONS: "off"
+    ports:
+      - "8000:8000"
+  repler:
+    build: repler
+    environment:
+      DOCKER: unix:///var/run/docker.sock
+      WS_URL: ws://node:8000/ws
+    links:
+      - node
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+#  web:
+#    build: .
+#    ports:
+#    - "5000:5000"
+#    volumes:
+#    - .:/code
+#    - logvolume01:/var/log
+#    links:
+#    - redis
+#volumes:
+#  logvolume01: {}
