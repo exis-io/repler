@@ -26,3 +26,17 @@ to the user.
     ```bash
     docker-compose up
     ```
+
+# Security
+
+By design, the repler enables execution of untrusted code.  We have
+followed best practices for ensuring the integrity and security of the
+host machine, including the following measures.
+
+* Stripping SETUID bits from executables in the base images.
+* Setting resource limits (CPU time, memory, and number of open files).
+* Dropping down to an unprivileged user before executing the code.
+
+It is highly recommended that you run an up-to-date version of Linux
+and Docker and that you isolate the repler from other services on your
+network.
